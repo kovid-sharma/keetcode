@@ -1,23 +1,29 @@
 class Solution {
 public:
     int numPairsDivisibleBy60(vector<int>& time) {
-        int n=time.size();
-        int ct=0;
-        int c2=0;
-        for(int i=0;i<n;i++)
-            time[i]%=60;
-        unordered_map<int,int>mp;
-        for(int i=0;i<n;i++)
+        int len=time.size();
+        for(int i=0;i<len;i++)
         {
-            mp[time[i]]++;
+            time[i]%=60;
         }
-        for(auto& it:mp)
+        unordered_map<int,int>m;
+        for(int i=0;i<len;i++)
+        {
+            m[time[i]]++;
+        }
+        int ret=0;
+        for(auto&it:m)
         {
             if(it.first==30 or it.first==0)
-                ct+=(mp[it.first]-1)*(it.second)/2;
-            else if(it.first<30 and mp.count(60-it.first))
-                ct+=(mp[it.first]*mp[60-it.first]);
+            {
+                ret+=(it.second)*(it.second-1)/2;
+            }
+            else if(it.first<30 and m.count(60-it.first)!=0)
+            {
+                ret+=(it.second)*m[60-it.first];
+            }
         }
-        return ct;
+        return ret;
+        
     }
 };

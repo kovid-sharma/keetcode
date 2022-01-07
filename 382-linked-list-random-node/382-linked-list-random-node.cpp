@@ -13,10 +13,10 @@ public:
     vector<int> arr;
     Solution(ListNode* head) {
         ListNode* temp=head;
-        while(temp!=NULL)
+        while(head!=NULL)
         {
-           arr.push_back(temp->val);
-            temp=temp->next;
+           arr.push_back(head->val);
+            head=head->next;
         }
      }
     

@@ -1,8 +1,8 @@
 class Solution {
 public:
     bool areNumbersAscending(string s) {
-        int idx=0;
         int n=s.size();
+        int idx=0;
         int prev=-1;
         while(idx<n)
         {   

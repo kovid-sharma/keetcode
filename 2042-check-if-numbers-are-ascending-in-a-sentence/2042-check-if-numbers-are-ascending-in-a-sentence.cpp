@@ -1,15 +1,14 @@
 class Solution {
 public:
     bool areNumbersAscending(string s) {
-        int n=s.size();
         int idx=0;
         int prev=-1;
-        while(idx<n)
+        while(idx<s.size())
         {   
             if(s[idx]>=48 and s[idx]<=57)
             {    
                 int ans=0;
-              while(s[idx]!=' ' and idx<n)
+              while(s[idx]!=' ' and idx<s.size())
               {
                  ans=ans*10+s[idx]-'0';
                   idx++;

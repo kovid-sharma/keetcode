@@ -11,14 +11,16 @@ public:
     bool hasCycle(ListNode *head) {
         //2 solutions 1st with maps 2nd with slow and fast
         if(head==NULL or head->next==NULL)return false;
-        ListNode*slow=head;
-        ListNode*fast=head;
-        while(fast->next!=NULL and fast->next->next!=NULL)
+        unordered_map<ListNode*,bool>mp;
+        while(head!=NULL and head->next!=NULL)
         {
-            slow=slow->next;
-            fast=fast->next->next;
-            if(fast==slow)
+            if(mp.find(head)!=mp.end())
                 return true;
+            else
+            {
+                mp[head]=true;
+                head=head->next;
+            }
         }
         return false;
     }

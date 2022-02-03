@@ -7,12 +7,12 @@ public:
         for(int i=0;i<n;i++)
             for(int j=0;j<n;j++)
             {
-                int tmp=nums1[i]+nums2[j];
+                int tmp=nums2[i]+nums3[j];
                 sumkifreq[tmp]++;
             }
         for(int i=0;i<n;i++)
             for(int j=0;j<n;j++){
-                int tmp=nums3[i]+nums4[j];tmp*=-1;
+                int tmp=nums1[i]+nums4[j];tmp*=-1;
                 if(sumkifreq.find(tmp)!=sumkifreq.end())
                     cnt+=sumkifreq[tmp];
             }

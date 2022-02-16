@@ -14,7 +14,8 @@ public:
         ListNode*firstfix=head;
         ListNode*firsttmp=NULL;
         ListNode*secondtmp=head;
-        while(--k)
+        k-=1;
+        while(k--)
             firstfix=firstfix->next;
         firsttmp=firstfix->next;
         

@@ -11,21 +11,21 @@
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
-        //valid index storing
-        if(head==NULL)return head;
-        ListNode* valid=head;ListNode* fulltraver=head->next;
-        int prevval= head->val;
-        while(fulltraver!=NULL)
-        {   
-            if(prevval!=fulltraver->val)
+       if(head==NULL) return head;
+        ListNode*collect=head;
+        int pre=head->val;
+        ListNode*aage=head->next;
+        while(aage!=NULL)
+        {
+            if(aage->val!=pre)
             {
-                valid->next=fulltraver;
-                prevval=fulltraver->val;
-                valid=valid->next;
+               pre=aage->val;
+                collect->next=aage;
+                collect=collect->next;
             }
-            fulltraver=fulltraver->next;
+            aage=aage->next;
         }
-        valid->next=NULL;
+        collect->next=NULL;
         return head;
     }
 };

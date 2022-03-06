@@ -1,7 +1,7 @@
 class Solution {
 public:
     int countOrders(int n) {
-       vector<long long>dp(501);
+       vector<long>dp(501);
         dp[1]=1;dp[2]=6;
         long long mod=1e9+7;
         for(int i=3;i<=500;i++)

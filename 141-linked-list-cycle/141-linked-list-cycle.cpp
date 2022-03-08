@@ -9,17 +9,15 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        //2 solutions 1st with maps 2nd with slow and fast
+        int n=1e4+1;
         if(head==NULL or head->next==NULL)return false;
-        int n=1e4+10;
         while(head->next!=NULL and head->next->next!=NULL)
         {
-            head=head->next;
             n--;
+            head=head->next;
             if(n==0)
                 return true;
         }
         return false;
-        
     }
 };

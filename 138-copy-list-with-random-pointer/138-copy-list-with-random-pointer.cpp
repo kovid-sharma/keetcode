@@ -1,18 +1,26 @@
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
-        map<Node*,Node*>mp;
-        Node*traver=head;
-        while(traver!=NULL)
-        {
-            mp[traver]=new Node(traver->val);
-            traver=traver->next;
-        }
-        for(auto &it:mp){
-            Node* nya= it.first;
-            mp[nya]->next=mp[nya->next];
-            mp[nya]->random=mp[nya->random];
-        }
-        return mp[head];
+        if(head==NULL) return NULL;
+    Node*org;
+    Node*cpy;
+    for(org=head;org!=NULL;org=org->next->next){
+        cpy=new Node(org->val);
+        cpy->next=org->next;
+        org->next=cpy;
+    }     
+    for(org=head;org!=NULL;org=org->next->next){
+        if(org->random!=NULL)
+        org->next->random=org->random->next;
     }
+        Node*ans=head->next;
+        for(org=head;org!=NULL;org=org->next){
+            cpy=org->next;
+            org->next=cpy->next;
+            if(cpy->next)
+            cpy->next=cpy->next->next;
+        }
+        return ans;
+    
+}
 };

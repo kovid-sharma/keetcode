@@ -25,29 +25,3 @@ public:
         return "/";
     }
 };
-/*class Solution {
-public:
-    string simplifyPath(string str) {
-        vector<string> v;
-        string ans = "";
-        
-        for(int i=0; i<str.size(); i++){
-            string path = "";
-            
-            while(i<str.size() and str[i]!='/') path += str[i++];   //get the string till i hits a '/'
-            
-            if(path == "" or path == ".") continue;     //If the string we get is "." or "" we skip the pushing part
-            else if(path == ".."){                                  
-                if(v.size()>0) v.pop_back();    //If "..", we pop back so as to go to parent directory
-            }
-            else v.push_back(path);     //To push the string we obtained till '/'
-            
-        }
-        
-        if(v.size() == 0) return "/";
-        
-        for(int i=0; i<v.size(); i++) ans += "/"+v[i];
-        
-        return ans;
-    }
-};*/

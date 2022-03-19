@@ -1,22 +1,23 @@
 class Solution {
 public:
     string removeDuplicateLetters(string s) {
-        vector<bool>inadd(26,false);
-        vector<int>freq(26,0);
-        for(int i=0;i<s.size();i++)
-            freq[s[i]-'a']++;
+        vector<bool>present(26,false);
+        vector<int>charfreq(26,0);
+        for(auto &it:s)
+            charfreq[it-'a']++;
         string res;
-        for(int i=0;i<s.size();i++)
-        {
-            freq[s[i]-'a']--;
-            if(inadd[s[i]-'a'])continue;
-            while(!res.empty() and res.back()>s[i] and freq[res.back()-'a']>0)
+        for(auto it:s)
+        {   
+            charfreq[it-'a']--;
+            if(present[it-'a'])continue;
+            while(!res.empty() and res.back()>it and charfreq[res.back()-'a']>0)
             {
-                inadd[res.back()-'a']=false;
+                
+                present[res.back()-'a']=false;
                 res.pop_back();
             }
-            res.push_back(s[i]);
-            inadd[s[i]-'a']=true;
+            res.push_back(it);
+            present[it-'a']=true;
         }
         return res;
     }

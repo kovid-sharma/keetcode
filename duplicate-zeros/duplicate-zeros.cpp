@@ -15,7 +15,9 @@ public:
                 arr[r]=arr[i];
                 
             }
-            if(arr[i]==0 and --r<n){
+            if(arr[i]==0)
+                r--;
+            if(arr[i]==0 and r<n){
                 arr[r]=0;
                 
                 

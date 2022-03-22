@@ -6,22 +6,15 @@ public:
             ans.push_back('a');
          k-=n;
         int i=n-1;
-        while(true){
-            if(k>=25){
-                ans[i]='z';
-                k-=25;
-                i--;
-            }
-            if(k==0){
-                break;
-            }
-            if(k<25){
-                ans[i]='a'+k;
-                k=0;
-            }
-            
-            
+        int zs= k/25;
+        int ne= k%25;
+        while(zs--)
+        {
+            i--;
+            ans[i+1]='z';
         }
+        if(ne!=0)
+        ans[i]='a'+ne;
         return ans;
         
     }

@@ -2,9 +2,11 @@ class List{
   public:
     int val;
     List* next;
+    List*prev;
     List(int x){
         val=x;
         next=NULL;
+        prev=NULL;
     }
 };
 class MyLinkedList {

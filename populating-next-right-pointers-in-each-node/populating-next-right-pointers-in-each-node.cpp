@@ -19,22 +19,24 @@ public:
 class Solution {
 public:
     Node* connect(Node* root) {
-        //levelorder
-        Node*leftline=root;
-        if(root==NULL)return root;
-        while(leftline!=NULL)
-        {   
-            Node*level=leftline;
-            while(level!=NULL and level->left!=NULL)
-            {
-                level->left->next=level->right;
-                if(level->next!=NULL)
-                {
-                    level->right->next=level->next->left;
+        if(root==NULL) return root;
+        queue<Node*>q;
+        q.push(root);
+        while(!q.empty()){
+            int n=q.size();
+            int to_popu=n-1;
+            Node*now=NULL;
+            for(int i=to_popu;i>=0;i--){
+                
+                Node*qka=q.front();
+                q.pop();
+                qka->next=now;
+                now=qka;
+                if(qka->right and qka->left){
+                    q.push(qka->right);
+                    q.push(qka->left);
                 }
-                level=level->next;
             }
-            leftline=leftline->left;
         }
         return root;
     }

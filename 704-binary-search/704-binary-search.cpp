@@ -1,7 +1,7 @@
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
-        if(nums.size()==1 and target==nums[0])return 0;
+    
         
         int hi=nums.size()-1;
         int lo=0;

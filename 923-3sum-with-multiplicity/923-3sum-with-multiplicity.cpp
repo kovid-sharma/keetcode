@@ -1,21 +1,46 @@
 class Solution {
 public:
-    int threeSumMulti(vector<int>& nums, int target) {
+    int threeSumMulti(vector<int>& arr, int target) {
         int ans=0;
-        int n=nums.size();
         int mod=1e9+7;
-        vector<int>A(301,0);
-        for(int i=0;i<n;i++)
-        {
-            for(int x=0;x<301;x++)A[x]=0;
-            for(int j=i+1;j<n;j++)
-            {
-                int req=target-nums[i]-nums[j];
-                if(req>=0) ans+=A[req];
-                ans%=mod;
-                A[nums[j]]++;
+        unordered_map<int,long>m;
+        for(int a:arr)m[a]++;
+        for(auto it:m)
+            for(auto it2:m){
+                int a=it.first;
+                int b=it2.first;
+                int c=target-a-b;
+                if(m.find(c)==m.end())continue;
+                if(a==b and a==c)
+                {
+                    ans+=(m[a]%mod*(m[a]-1)%mod*(m[a]-2)/6)%mod;
+                }
+                else if(c==b and b!=a)
+                {
+                    ans+=(m[a]%mod*(m[b]%mod*(m[b]-1))/2)%mod;
+                }
+                else if(c<b and b<a)
+                {
+                    ans+=(m[a]%mod*m[b]%mod*m[c])%mod;
+                }
             }
-        }
         return ans%mod;
     }
 };
+/*int threeSumMulti(vector<int>& A, int target) {
+        unordered_map<int, long> c;
+        for (int a : A) c[a]++;
+        long res = 0;
+        for (auto it : c)
+            for (auto it2 : c) {
+                int i = it.first, j = it2.first, k = target - i - j;
+                if (!c.count(k)) continue;
+                if (i == j && j == k)
+                    res += c[i] * (c[i] - 1) * (c[i] - 2) / 6;
+                else if (i == j && j != k)
+                    res += c[i] * (c[i] - 1) / 2 * c[k];
+                else if (i < j && j < k)
+                    res += c[i] * c[j] * c[k];
+            }
+        return res % int(1e9 + 7);
+    }*/

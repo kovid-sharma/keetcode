@@ -3,21 +3,19 @@ public:
     int longestOnes(vector<int>& nums, int k) {
         int begin=0;
         int numz=0;
-        int ma=INT_MIN;
-        for(int end=0;end<nums.size();end++)
+        int end=0;
+        for(end=0;end<nums.size();end++)
         {
             if(nums[end]==0)
-            {
                 numz++;
-            }
+            
             if(numz>k)
             {   
                 if(nums[begin]==0)
                     numz--;
                 begin++;
-            }
-            ma=max(ma,end-begin+1);
-                
-        }return ma;
+            }   
+        }
+        return (end-begin);
     }
 };

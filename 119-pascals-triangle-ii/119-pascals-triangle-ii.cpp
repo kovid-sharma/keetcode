@@ -1,24 +1,16 @@
 class Solution {
 public:
     vector<int> getRow(int rowIndex) {
-        int numRows=34;
-        vector<vector<int>>ans;
-        ans.push_back({1});
-        ans.push_back({1,1});
-        for(int i=3;i<=numRows;i++)
+        vector<int>ans(rowIndex+1);
+        if(rowIndex==0)return {1};
+        ans[0]=1;ans[1]=1;
+        for(int i=1;i<rowIndex;i++)
         {
-            vector<int>row;
-            row.push_back(1);
-            for(int j=1;j<=i-2;j++)
+            for(int j=i+1;j>0;j--)
             {
-                vector<int>lastrow=ans.back();
-                int sum=lastrow[j]+lastrow[j-1];
-                row.push_back(sum);
+                ans[j]+=ans[j-1];
             }
-            row.push_back(1);
-            ans.push_back(row);
-            row.clear();
         }
-        return ans[rowIndex];
+        return ans;
     }
 };

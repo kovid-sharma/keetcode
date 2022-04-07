@@ -1,29 +1,30 @@
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
-        // stl soln
-       
-        vector<int> ans;
-        ans.push_back(-1);
-        ans.push_back(-1);
-         if(nums.size()==0) return ans;
-        if(nums.size()==1)
+        vector<int>ret(2,-1);
+        if(nums.empty())return ret;
+        if(!binary_search(nums.begin(),nums.end(),target))return ret;
+        int lo=0;
+        int hi=nums.size()-1;
+        while(lo<hi)
         {
-            if(target!=nums[0])
-                return ans;
+            int mid= lo+(hi-lo)/2;
+            if(nums[mid]<target)
+                lo=mid+1;
             else
-            {
-                ans[0]=0;ans[1]=0;
-            }
-            return ans;
+                hi=mid;
         }
-        int indx= lower_bound(nums.begin(),nums.end(),target)-nums.begin();
-        
-        if(indx>=0 and indx<nums.size() and nums[indx]==target)
-            ans[0]=indx;
-        indx= upper_bound(nums.begin(),nums.end(),target)-nums.begin();
-        if(indx>0 and indx<=nums.size() and nums[indx-1]==target)
-            ans[1]=indx-1;
-        return ans;
+        ret[0]=lo;
+        hi=nums.size()-1;
+        while(lo<hi)
+        {
+           int mid= (hi+lo+1)/2;
+            if(nums[mid]>target)
+                hi=mid-1;
+            else
+                lo=mid; 
+        }
+        ret[1]=hi;
+        return ret;
     }
 };

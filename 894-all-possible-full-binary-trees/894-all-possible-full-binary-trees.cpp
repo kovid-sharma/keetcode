@@ -11,6 +11,7 @@
  */
 class Solution {
 public:
+    unordered_map<int,vector<TreeNode*>>mp;
     vector<TreeNode*> rec(int n)
     {   vector<TreeNode*>to_ret;
         if(n==1)
@@ -18,6 +19,10 @@ public:
            TreeNode*add=new TreeNode(0);
            to_ret.push_back(add);return to_ret;
         }
+     if(mp.find(n)!=mp.end())
+     {
+         return mp[n];
+     }
      for(int i=1;i<n;i+=2)
      {
         vector<TreeNode*>leftsubtree=rec(i);
@@ -32,7 +37,7 @@ public:
              }
          
      }
-     
+     mp[n]=to_ret;
      return to_ret;
     }
     vector<TreeNode*> allPossibleFBT(int n) {

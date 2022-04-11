@@ -2,24 +2,28 @@ class Solution {
 public:
     vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
         set<pair<int,int>>st;
-        for(int i=0;i<mat.size();i++)
+        int rows=mat.size();
+        int cols=mat[0].size();
+        for(int i=0;i<rows;i++)
         {
-            int cnt1=0;
-            for(int j=0;j<mat[i].size();j++)
+            int lo=0;
+            int hi=cols-1;
+            while(lo<=hi)
             {
-                if(mat[i][j]==1)
-                    cnt1++;
+                int mid= lo+(hi-lo)/2;
+                if(mat[i][mid]==0)
+                    hi=mid-1;
+                else
+                    lo=mid+1;
             }
-            st.insert({cnt1,i});
+            st.insert({hi,i});
+            
         }
-        int i=0;
         vector<int>ans;
-        for(auto it:st){
-            if(i==k){
-                break;
-            }
+        for(auto it:st)
+        {
             ans.push_back(it.second);
-            i++;
+            if(ans.size()==k)return ans;
         }
         return ans;
     }

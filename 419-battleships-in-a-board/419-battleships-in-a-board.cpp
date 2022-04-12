@@ -7,9 +7,9 @@ public:
         {
             board[x][y]=':';
             dfs(row,col,x+1,y,board);
-            dfs(row,col,x-1,y,board);
+           // dfs(row,col,x-1,y,board);
             dfs(row,col,x,y+1,board);
-            dfs(row,col,x,y-1,board);
+            //dfs(row,col,x,y-1,board);
         }
         else
             return;

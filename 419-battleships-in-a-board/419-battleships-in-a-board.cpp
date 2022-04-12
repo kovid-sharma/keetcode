@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void dfs(int row,int col,int x,int y,vector<vector<char>>& board)
+   /* void dfs(int row,int col,int x,int y,vector<vector<char>>& board)
     {   
         if(x<0 or y<0 or x>=row or y>=col)return;
         if(board[x][y]=='X')
@@ -13,7 +13,7 @@ public:
         }
         else
             return;
-    }
+    }*/
     int countBattleships(vector<vector<char>>& board) {
         int cnt=0;
         int row=board.size();
@@ -22,10 +22,10 @@ public:
         {
             for(int j=0;j<col;j++)
             {
-                if(board[i][j]=='X')
+                if(board[i][j]=='X' and (i==0 or board[i-1][j]!='X') and (j==0 or board[i][j-1]!='X'))
                 {
                     cnt++;
-                    dfs(row,col,i,j,board);
+                    
                 }
             }
         }

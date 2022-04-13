@@ -1,41 +1,40 @@
 class Solution {
 public:
     vector<vector<int>> generateMatrix(int n) {
-        vector<vector<int>> arr(n,vector<int>(n));
-        int ans=1;
-        int cycle=0,index=0;//cycle starts from 0 after one cycle it becomes1
-        while(ans<=n*n)
+        int st_row=0;
+        int st_col=0;
+        int en_row=n-1;
+        int en_col=n-1;
+        int curr=1;
+        vector<vector<int>>ans(n,vector<int>(n));
+        while(st_row<=en_col and st_col<=en_col)
         {   
-            index=cycle;
-            while(index<n-cycle)
+            for(int i=st_col;i<=en_col;i++)
             {
-                arr[cycle][index]=ans;
-                index++;
-                ans++;
+                ans[st_row][i]=curr;
+                curr++;
             }
-            index=cycle+1;
-            while(index<n-cycle)
+            st_row++;
+            for(int i=st_row;i<=en_row;i++)
             {
-                arr[index][n-cycle-1]=ans;
-                ans++;
-                index++;
+                 ans[i][en_col]=curr;
+                 curr++;
             }
-            index=n-cycle-2;
-            while(index>=cycle)
+            en_col--;
+            for(int i=en_col;i>=st_col;i--)
             {
-                arr[n-cycle-1][index]=ans;
-                ans++;
-                index--;
+                ans[en_row][i]=curr;
+                curr++;
             }
-            index=n-cycle-2;
-            while(index>cycle)
+            en_row--;
+            for(int i=en_row;i>=st_row;i--)
             {
-                arr[index][cycle]=ans;
-                ans++;
-                index--;
+                ans[i][st_col]=curr;
+                curr++;
             }
-            cycle++; 
+            st_col++;
         }
-        return arr;
+        return ans;
+        
     }
 };

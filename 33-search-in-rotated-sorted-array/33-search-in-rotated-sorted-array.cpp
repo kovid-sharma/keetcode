@@ -12,7 +12,7 @@ public:
         }
         int idx=lo;
         lo=0;int hi=n-1;
-        while(hi-lo>=0)
+        while(hi>=lo)
         {
             int mid=(lo+hi)/2;
             int realmid=(mid+idx)%n;

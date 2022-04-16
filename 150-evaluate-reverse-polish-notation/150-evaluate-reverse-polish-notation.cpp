@@ -2,7 +2,7 @@ class Solution {
 public:
     int evalRPN(vector<string>& tokens) {
         stack<int>st;
-        for(auto it:tokens)
+        for(auto &it:tokens)
         {
             if(it=="+" or it=="-" or it=="*" or it=="/")
             {

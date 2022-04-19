@@ -11,28 +11,26 @@
  */
 class Solution {
 public:
-    vector<int>ans;
-    void traver(TreeNode*root){
+    TreeNode*prev=new TreeNode(INT_MIN);
+    TreeNode*swap1=NULL;
+    TreeNode*swap2=NULL;
+    void traver(TreeNode*root)
+    {   
         if(root){
         traver(root->left);
-        ans.push_back(root->val);
+        if(swap1==NULL and prev->val>root->val)
+        {
+            swap1=prev;
+        }
+        if(swap1!=NULL and prev->val>root->val){
+            swap2=root;
+        }
+        prev=root;
         traver(root->right);
         }
     }
-    void fix(int &idx,TreeNode*root)
-    {
-        if(root)
-        {
-            fix(idx,root->left);
-            root->val=ans[idx];idx++;
-            fix(idx,root->right);
-        }
-    }
-    void recoverTree(TreeNode* root) {  
+    void recoverTree(TreeNode* root) {
         traver(root);
-        sort(ans.begin(),ans.end());
-        int idx=0;
-        fix(idx,root);
-        //for(auto it:ans)cout<<it<<" ";
+        swap(swap1->val,swap2->val);
     }
 };

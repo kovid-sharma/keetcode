@@ -11,28 +11,29 @@
  */
 class BSTIterator {
 public:
-    vector<int>store;
-    int idx=0;
-    void traverse(TreeNode*root)
+    stack<TreeNode*>st;
+    void pusher(TreeNode*root)
     {
-        if(root)
+        while(root)
         {
-            traverse(root->left);
-            store.push_back(root->val);
-            traverse(root->right);
+            st.push(root);
+            root=root->left;
         }
     }
     BSTIterator(TreeNode* root) {
         
-        traverse(root);
+        pusher(root);
     }
     
     int next() {
-        return store[idx++];
+        TreeNode*tmp=st.top();
+        st.pop();
+        pusher(tmp->right);
+        return tmp->val;
     }
     
     bool hasNext() {
-        return idx<store.size();
+        return !st.empty();
     }
 };
 

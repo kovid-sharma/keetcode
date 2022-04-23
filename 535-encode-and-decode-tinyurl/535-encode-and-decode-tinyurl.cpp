@@ -3,12 +3,19 @@ public:
 
     // Encodes a URL to a shortened URL.
     string encode(string longUrl) {
-        return longUrl;
+        string re;
+        for(auto it:longUrl)
+        {
+            re.push_back(it+'a');
+        }return re;
     }
 
     // Decodes a shortened URL to its original URL.
     string decode(string shortUrl) {
-        return shortUrl;
+        string re;
+        for(auto it:shortUrl)
+            re.push_back(it-'a');
+        return re;
     }
 };
 

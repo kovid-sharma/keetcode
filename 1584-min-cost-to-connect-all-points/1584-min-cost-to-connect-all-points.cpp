@@ -8,10 +8,10 @@ public:
         int total=0;
         priority_queue<pair<int,int>>pq;//stores value of cost and neg to make it min heap
         int st=0;
+        counted[st]=true;
         while(total<n-1)//total connections to be made are n-1 in spanning tree
         {
-            counted[st]=true;
-            total++;
+            
             for(int idx=0;idx<n;idx++)  //travelling to each eleemtn and checking distance
                 if(counted[idx]==false)
                 {
@@ -20,6 +20,8 @@ public:
             while(counted[pq.top().second]==true)
                 pq.pop();
             st=pq.top().second;
+            counted[st]=true;
+            total++;
             //counted[st]=true;
             cost+=pq.top().first;
             pq.pop();
@@ -28,20 +30,3 @@ public:
         return -1*cost;
     }
 };
-/*int minCostConnectPoints(vector<vector<int>>& ps) {
-    int n = ps.size(), res = 0, i = 0, connected = 0;
-    vector<bool> visited(n);
-    priority_queue<pair<int, int>> pq;
-    while (++connected < n) {
-        visited[i] = true;
-        for (int j = 0; j < n; ++j)
-            if (!visited[j])
-                pq.push({-(abs(ps[i][0] - ps[j][0]) + abs(ps[i][1] - ps[j][1])), j});
-        while (visited[pq.top().second])
-            pq.pop();
-        res -= pq.top().first;
-        i = pq.top().second;
-        pq.pop();
-    }
-    return res;
-}*/

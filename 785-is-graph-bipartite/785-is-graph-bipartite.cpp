@@ -5,26 +5,26 @@ public:
         vector<int>col(n,0);
         for(int i=0;i<n;i++)
         {   
-            if(col[i]==0){
-            queue<int>q;
-            q.push(i);
-            col[i]=1;
-            while(!q.empty())
-            {
-                int top=q.front();
-                q.pop();
-                for(int j=0;j<graph[top].size();j++)
+            if(!col[i]){
+                queue<int>q;
+                q.push(i);
+                col[i]=1;
+                while(!q.empty())
                 {
-                    if(col[graph[top][j]]==col[top])return false;
-                    if(col[graph[top][j]]==0){
-                    col[graph[top][j]]=-col[top];
-                    q.push(graph[top][j]);
+                    int top=q.front();
+                    q.pop();
+                    for(auto it:graph[top])
+                    {
+                        if(col[it]==col[top])return false;
+                        if(col[it]==0)
+                        {
+                            col[it]=-col[top];
+                            q.push(it);
+                        }
                     }
                 }
             }
-                
         }
-            //return true;
-    }return true;
-}
+        return true;
+    }
 };

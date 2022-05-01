@@ -1,33 +1,23 @@
 class Solution {
 public:
+    int a(vector<vector<int>>&grid,int idx,int idy){
+        if(idx<0 or idy<0 or idx>=grid.size() or idy>=grid[0].size() or grid[idx][idy]==0)
+            return 0;
+        if(grid[idx][idy]==2)
+            return 0;
+        grid[idx][idy]=2;
+        return 1+
+        a(grid,idx+1,idy)+
+        a(grid,idx-1,idy)+
+        a(grid,idx,idy+1)+
+        a(grid,idx,idy-1);
+    }
     int maxAreaOfIsland(vector<vector<int>>& grid) {
-        //recur
-        int m=INT_MIN;
-       for(int i=0;i<grid.size();i++)
-       {
-           for(int j=0;j<grid[0].size();j++)
-           {
-               if(grid[i][j]==1)
-               {
-                   m= max(area(i,j,grid),m);
-               }
-           }
-       }
-        return max(m,0);
+        int ma=0;
+        for(int i=0;i<grid.size();i++)
+            for(int j=0;j<grid[0].size();j++)
+                if(grid[i][j]==1)
+                    ma=max(a(grid,i,j),ma);
+        return ma;
     }
-    int area(int x,int y,vector<vector<int>>& matrix)
-    {
-        if(x>=0 and x<matrix.size() and y>=0 and y<matrix[0].size())
-        {
-        if(matrix[x][y]==1)
-        {   
-            matrix[x][y]=0;
-            return 1 + area(x-1,y,matrix) +area(x+1,y,matrix) + area(x,y-1,matrix) +                area(x,y+1,matrix);
-        
-        }
-            
-        }
-        return 0;
-    }
-    
 };

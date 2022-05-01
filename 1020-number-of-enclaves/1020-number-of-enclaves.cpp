@@ -16,13 +16,17 @@ public:
         int col=grid[0].size();
         for(int i=0;i<row;i++)
         {   
+            if(grid[i][0]==1)
             dfs(grid,row,col,i,0);//line vertical
+            if(grid[i][col-1]==1)
             dfs(grid,row,col,i,col-1);//vertical 2
             
         }
         for(int i=0;i<col;i++)
-        {
+        {   
+            if(grid[0][i]==1)
             dfs(grid,row,col,0,i);//line horizontal
+            if(grid[row-1][i]==1)
             dfs(grid,row,col,row-1,i);//horizon 2 bottom
         }
         int cnt=0;

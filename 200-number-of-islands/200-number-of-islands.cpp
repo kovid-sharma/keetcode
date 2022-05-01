@@ -1,50 +1,27 @@
 class Solution {
 public:
-    /*void dfs(int idx,int idy,vector<vector<char>>&g)
-    {
-        if(idx<0 or idy<0 or idx>=g.size() or idy>=g[0].size() or g[idx][idy]=='0')
+    void dfs(vector<vector<char>>& grid,int row,int col,int i,int j){
+        if(i<0 or j<0 or i>=row or j>=col or grid[i][j]=='0')
             return;
-        g[idx][idy]='0';
-        dfs(idx+1,idy,g);
-         dfs(idx-1,idy,g);
-         dfs(idx,idy+1,g);
-         dfs(idx,idy-1,g);
-    }*/
+
+            grid[i][j]='0';
+        dfs(grid,row,col,i+1,j);
+        dfs(grid,row,col,i-1,j);
+        dfs(grid,row,col,i,j-1);
+        dfs(grid,row,col,i,j+1);
+    }
     int numIslands(vector<vector<char>>& grid) {
-        //dfs first then bfs now bfs
+        //visisted can be made water
         int row=grid.size();
         int col=grid[0].size();
-        int cnt=0;
-        /*for(int i=0;i<row;i++)
-            for(int j=0;j<col;j++)
-                if(grid[i][j]=='1')
-                    dfs(i,j,grid),cnt++;*/
-        queue<pair<int,int>>q;
-        vector<int>dir={0,-1,0,1,0};
+        int numIsland=0;
         for(int i=0;i<row;i++)
-        {
             for(int j=0;j<col;j++)
-            {
                 if(grid[i][j]=='1')
                 {
-                    q.push({i,j});cnt++;
-                    while(!q.empty())
-                    {
-                        pair<int,int>now=q.front();
-                        q.pop();
-                        for(int k=0;k<4;k++)
-                        {
-                            int xn=now.first+dir[k];
-                            int yn=now.second+dir[k+1];
-                            if(xn<0 or yn<0 or xn>=row or yn>=col)continue;
-                            if(grid[xn][yn]=='1')
-                                q.push({xn,yn});
-                            grid[xn][yn]='0';
-                        }
-                    }
+                    numIsland++;
+                    dfs(grid,row,col,i,j);
                 }
-            }
-        }
-        return cnt;
+        return numIsland;
     }
 };

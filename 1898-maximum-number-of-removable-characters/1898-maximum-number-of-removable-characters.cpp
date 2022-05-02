@@ -34,7 +34,7 @@ public:
             }
             else{
                 //do
-                for(int i=0;i<=hi;i++)
+                for(int i=lo;i<=hi;i++)
                     s[removable[i]]=str[removable[i]];
                 hi=mid-1;
             }

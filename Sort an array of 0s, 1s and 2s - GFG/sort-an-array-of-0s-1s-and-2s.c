@@ -6,20 +6,32 @@
 
  // } Driver Code Ends
 //User function Template for C
-
+// void swap(int& a,int& b){
+//     int c=a;
+//     a=b;
+//     b=c;
+// }
 void sort012(int a[], int n)
 {
-    int zero=0;
-    int one=0;
-    for(int i=0;i<n;i++){
-        if(a[i]==0) zero++;
-        else if(a[i]==1) one++;
-    }
-    for(int i=0;i<n;i++)
-        a[i]=2;
-    for(int i=0;i<n;i++){
-        if(i<zero) a[i]=0;
-        else if(i>=zero && i<one+zero) a[i]=1;
+    int lo=0;
+    int mi=0;
+    int hi=n-1;
+    while(mi<=hi){
+        if(a[mi]==0){
+            int c=a[mi];
+            a[mi]=a[lo];
+            a[lo]=c;
+            lo++;mi++;
+        }
+        else if(a[mi]==1){
+            mi++;
+        }
+        else{
+            int c=a[mi];
+            a[mi]=a[hi];
+            a[hi]=c;
+            hi--;
+        }
     }
 
     

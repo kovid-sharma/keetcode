@@ -18,7 +18,8 @@ public:
 	    arr[i]%=k;
 	    for(int i=0;i<n;i++)
 	    {
-	        sum=(sum+arr[i])%k;
+	        sum+=(arr[i])%k;
+	        sum%=k;
 	        if(sum<0)sum+=k;
 	        if(ids[sum]==INT_MAX)
 	        ids[sum]=i;

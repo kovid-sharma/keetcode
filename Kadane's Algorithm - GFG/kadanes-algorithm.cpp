@@ -16,8 +16,7 @@ class Solution{
         long long minx=INT_MIN;
         for(int i=0;i<n;i++)
         {
-            if(minx<0)
-            minx=0;
+            minx=max(0LL,minx);
             minx+=arr[i];
             sum=max(minx,sum);
         }

@@ -13,12 +13,14 @@ class Solution
     int minNumber(int arr[], int low, int high)
     {
         // Your code here
-       while(high>low)
+       while(high>=low)
         {
             int mid=(low+high)/2;
+            if(arr[mid]<arr[mid-1])
+            return arr[mid];
             if(arr[mid]>arr[high]) 
                 low=mid+1;
-            else high=mid;
+            else high=mid-1;
         }
         return arr[low];
     }

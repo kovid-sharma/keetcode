@@ -19,21 +19,29 @@ void MoveNode(struct Node** destRef, struct Node** sourceRef);
  // } Driver Code Ends
 //User function Template for C
 
-struct Node* SortedMerge(struct Node* l1, struct Node* l2)
-{   
-    // Node*l1=a;
-    // Node*l2=b;
-    if(l1==NULL)return l2;
-        if(l2==NULL)return l1;
-        if(l1->data>l2->data){
-            l2->next=SortedMerge(l2->next,l1);
-            return l2;
-        }
-        else
-        {
-            l1->next=SortedMerge(l1->next,l2);
-            return l1;
-        }
+
+struct Node* m(struct Node*a,struct Node*b)
+{
+    if(a==NULL)
+    return b;
+    if(b==NULL)
+    return a;
+    if(a->data>b->data)
+    {
+        b->next=m(a,b->next);
+        return b;
+    }
+    else
+    {
+        a->next=m(b,a->next);
+        return a;
+    }
+}
+
+
+struct Node* SortedMerge(struct Node* a, struct Node* b)
+{
+    return m(a,b);
 }
 
 // { Driver Code Starts.

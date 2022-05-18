@@ -20,7 +20,7 @@ public:
         if(sum==root->val and root->right==NULL and root->left==NULL)
         {
             ans.push_back(tmp);
-            return;
+            // return;
         }
         dfs(root->left,sum-root->val,tmp);
         dfs(root->right,sum-root->val,tmp);

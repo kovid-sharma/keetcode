@@ -27,7 +27,7 @@ public:
         string tmp;
         // tmp.push_back(S[0]);
         rec(ans,S,tmp,0);
-        sort(ans.begin(),ans.end());
+       // sort(ans.begin(),ans.end());
         return ans;
     }
 };

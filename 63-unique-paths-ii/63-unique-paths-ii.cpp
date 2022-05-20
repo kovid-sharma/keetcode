@@ -1,20 +1,23 @@
 class Solution {
 public:
-    int fun(int r,int c,vector<vector<int>>&A,vector<vector<int>>&dp)
+    int dfs(int i,int j,vector<vector<int>>&o,vector<vector<int>>&dp)
     {
-        if(r==0 or c==0)
-            return 0;
-        if(A[r-1][c-1]==1)
-            return 0;
-        if(r==1 and c==1)
+        if(i==o.size()-1 and j==o[0].size()-1){
             return 1;
-        if(dp[r][c]>0)return dp[r][c];
-        return dp[r][c]=fun(r-1,c,A,dp)+fun(r,c-1,A,dp);
+        }
+        if(i<0 or j<0 or i>=o.size() or j>=o[0].size() or o[i][j]==1)
+            return 0;
+        if(dp[i][j]!=-1)
+            return dp[i][j];
+        return dp[i][j]=dfs(i+1,j,o,dp)+dfs(i,j+1,o,dp);
     }
-    int uniquePathsWithObstacles(vector<vector<int>>& A) {
-        int r=A.size();
-        int c=A[0].size();
-        vector<vector<int>>dp(r+1,vector<int>(c+1,0));
-        return fun(r,c,A,dp);
+    int uniquePathsWithObstacles(vector<vector<int>>& o) {
+        int m=o.size();
+        int n=o[0].size();
+        if(o[0][0]==1 or o[m-1][n-1]==1)
+            return 0;
+        vector<vector<int>>dp(m,vector<int>(n,-1));
+        return dfs(0,0,o,dp);
+        // return dp[m-1][n-1];
     }
 };

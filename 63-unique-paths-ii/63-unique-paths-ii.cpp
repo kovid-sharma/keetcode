@@ -5,7 +5,7 @@ public:
         if(i==o.size()-1 and j==o[0].size()-1){
             return 1;
         }
-        if(i<0 or j<0 or i>=o.size() or j>=o[0].size() or o[i][j]==1)
+        if(i>=o.size() or j>=o[0].size() or o[i][j]==1)
             return 0;
         if(dp[i][j]!=-1)
             return dp[i][j];

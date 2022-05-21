@@ -1,22 +1,24 @@
 class Solution {
 public:
-   
-    int dp[10005];
-    int func(vector<int>&coins,int amount)
-    {   
-        if(amount==0)return 0;
-        if(dp[amount]!=-1)return dp[amount];
-         int ans=INT_MAX;
-        for(auto&it:coins)
-        {
-            if(amount-it>=0)
-            ans=min(ans+0LL,func(coins,amount-it)+1LL);
+    int rec(vector<int>&dp,vector<int>&coins,int mon)
+    {
+        if(mon==0)
+            return 0;
+        if(dp[mon]!=-1)return dp[mon];
+        int ret=INT_MAX;
+        for(int i=0;i<coins.size();i++)
+        {  
+            if(mon-coins[i]>=0)
+            ret=min(ret*1LL,rec(dp,coins,mon-coins[i])+1LL);
         }
-        return dp[amount]=ans;
+        dp[mon]=ret;
+        return dp[mon];
     }
     int coinChange(vector<int>& coins, int amount) {
-        memset(dp,-1,sizeof(dp));
-        int ans=func(coins,amount);
-        return ans==INT_MAX?-1:ans;
+        vector<int>dp(amount+1,-1);
+        int ans=rec(dp,coins,amount);
+        if(ans==INT_MAX)
+            return -1;
+        return ans;
     }
 };

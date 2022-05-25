@@ -8,26 +8,26 @@ public:
     int maxLength(string S)
     {
         // code here
-        vector<int>dp(S.size(),1);
+        int cnt=0;
+        string form;
         for(int i=0;i<S.size();i++)
         {
-            for(int j=0;j<i;j++)
+            if(form.empty()){
+                cnt++;
+                form.push_back(S[i]);
+                continue;
+            }
+            if(form.back()>=S[i])
             {
-                if(S[j]<S[i])
-                {
-                    if(dp[i]<dp[j]+1)
-                    {
-                        dp[i]=dp[j]+1;
-                    }
-                }
+                auto gre=lower_bound(form.begin(),form.end(),S[i])-form.begin();
+                form[gre]=S[i];
+            }
+            else{
+                cnt++;
+                form.push_back(S[i]);
             }
         }
-        int ans=1;
-        for(auto it:dp)
-        {
-            ans=max(ans,it);
-        }
-        return ans;
+        return cnt;
     }
 };
 

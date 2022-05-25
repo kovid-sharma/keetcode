@@ -2,18 +2,30 @@ class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
         int n=nums.size();
-        vector<int>dp(n,1);
+        vector<int>ret;
         for(int i=0;i<n;i++)
         {
-            for(int j=0;j<i;j++)
-            {   
-                if(nums[j]<nums[i])
-                dp[i]=max(dp[i],dp[j]+1);
+            if(ret.empty())
+                ret.push_back(nums[i]);
+            if(ret.back()>=nums[i])
+            {
+                auto it=lower_bound(ret.begin(),ret.end(),nums[i])-ret.begin();
+                ret[it]=nums[i];
             }
+            else
+                ret.push_back(nums[i]);
         }
-        int ans=1;
-        for(auto it:dp)
-            ans=max(ans,it);
-        return ans;
+        return ret.size();
     }
 };
+/*
+        for (int x : nums) {
+            if (sub.empty() || sub[sub.size() - 1] < x) {
+                sub.push_back(x);
+            } else {
+                auto it = lower_bound(sub.begin(), sub.end(), x); // Find the index of the smallest number >= x
+                *it = x; // Replace that number with x
+            }
+        }
+        return sub.size();
+    }*/

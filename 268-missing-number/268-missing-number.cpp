@@ -1,7 +1,7 @@
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
-        int now=0;
+        int now=1;
         int sz=nums.size();
         int res=0;
         while(now<=sz)

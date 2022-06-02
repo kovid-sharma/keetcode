@@ -1,5 +1,5 @@
 # Rat Maze With Multiple Jumps
-## Medium 
+##  Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">A Maze is given as <strong>n*n</strong>&nbsp;matrix of blocks where source block is the upper left most block i.e., <strong>matrix[0][0]</strong> and destination block is lower rightmost block i.e., <strong>matrix[n-1][n-1]</strong>. A rat starts from source and has to reach the destination. The rat can move in only two directions: first forward if possible or down. If multiple solutions exist, the shortest earliest hop will be accepted. For the same hop distance at any point, forward will be preferred over downward. In the maze matrix, 0 means the block is the dead end and non-zero number means the block can be used in the path from source to destination. The non-zero value of mat[i][j] indicates number of maximum jumps rat can make from cell mat[i][j]. In this variation, Rat is allowed to jump multiple steps at a time instead of 1. Find a matrix which describes the position the rat to reach at the destination.</span><br>
 &nbsp;</p>

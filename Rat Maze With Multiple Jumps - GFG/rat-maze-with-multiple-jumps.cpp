@@ -5,29 +5,30 @@ using namespace std;
  // } Driver Code Ends
 class Solution {
 public:
-bool dfs(int i,int j,vector<vector<int>>&ans,vector<vector<int>>&matrix,int n)
+bool dfs(int i,int j,vector<vector<int>>&ans,vector<vector<int>>&matrix)
 {
-    if(i==n-1 and j==n-1)
+    if(i==ans.size()-1 and j==ans.size()-1)
     {
         ans[i][j]=1;
         return true;
     }
-    if(i>=n or j>=n)
-    {
+    if(i<0 or j<0 or i>=matrix.size() or j>=matrix[0].size()){
         return false;
     }
-    if(matrix[i][j]==0)
-    {
+    if(matrix[i][j]==0){
         ans[i][j]=0;
         return false;
     }
     ans[i][j]=1;
-    for(int jump=1;jump<=matrix[i][j];jump++)
+    int tmp=1;
+    while(tmp<=matrix[i][j])
     {
-        if(dfs(i,j+jump,ans,matrix,n))
+        if(dfs(i,j+tmp,ans,matrix))
         return true;
-        if(dfs(i+jump,j,ans,matrix,n))
+        if(dfs(i+tmp,j,ans,matrix))
         return true;
+        tmp++;
+        
     }
     ans[i][j]=0;
     return false;
@@ -36,10 +37,11 @@ bool dfs(int i,int j,vector<vector<int>>&ans,vector<vector<int>>&matrix,int n)
 	   // Code here
 	   int n=matrix.size();
 	   vector<vector<int>>ans(n,vector<int>(n,0));
-	   if(dfs(0,0,ans,matrix,n))
+	   if(dfs(0,0,ans,matrix))
 	   return ans;
 	   else
 	   return {{-1}};
+	   
 	}
 
 };

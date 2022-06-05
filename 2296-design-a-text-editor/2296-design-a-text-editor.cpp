@@ -46,31 +46,7 @@
 //         return ans;
 //     }
     
-//     string cursorRight(int k) {
-//         int part2Sz=part2.size();
-//         part2Sz=min(k,part2Sz);
-//         while(part2Sz--)
-//         {
-//             char ch=part2.top();
-//             part2.pop();
-//             part1.push(ch);
-//         }
-//         int x=part1.size();
-//         int x2=10;
-//         int strSz=min(x2,x);
-//         string ans;
-//         while(strSz--)
-//         {
-//             char ch=part1.top();
-//             part1.pop();
-//             ans.push_back(ch);
-//         }
-//         for(auto ch:ans)
-//             part1.push(ch);
-//         reverse(ans.begin(),ans.end());
-//         return ans;
-//     }
-// };
+
 class TextEditor {
     stack<char> left;
     stack<char> right;

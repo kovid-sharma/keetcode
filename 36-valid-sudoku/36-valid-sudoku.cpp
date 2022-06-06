@@ -1,37 +1,27 @@
 class Solution {
 public:
-    int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
-        int n=grid.size();
-        if(grid[0][0]==1 or grid[n-1][n-1]==1)
-            return -1;
-        int move=1;
-        queue<pair<int,int>>q;
-        q.push({0,0});
-        grid[0][0]=1;
-        int dir[8][2]={{1,0},{-1,0},{1,1},{-1,-1},{1,-1},{-1,1},{0,1},{0,-1}};
-        while(!q.empty())
-        {
-            int s=q.size();
-            for(int j=0;j<s;j++)
-            {
-                int x=q.front().first;
-                int y=q.front().second;
-                q.pop();
-                if(x==n-1 and y==n-1)
-                    return move;
-                for(int i=0;i<8;i++)
-                {
-                    int r=x+dir[i][0];
-                    int c=y+dir[i][1];
-                    if(r>=0 and c>=0 and r<n and c<n and grid[r][c]==0){
-                        grid[r][c]=1;
-                        q.push({r,c});
-                    }
-                }
-                
-            }
-            move++;
-        }
-        return -1;
+    bool valiDate(int i,int j,vector<vector<char>>&board,char val)
+    {
+        for(int x=0;x<9;x++)
+            if(board[x][j]==val and x!=i)
+                return false;
+        for(int y=0;y<9;y++)
+            if(board[i][y]==val and y!=j)
+                return false;
+        int rSub=i-i%3;
+        int cSub=j-j%3;
+        for(int x=0;x<3;x++)
+            for(int y=0;y<3;y++)
+                if(board[rSub+x][cSub+y]==val and rSub+x!=i and cSub+y!=j)
+                    return false;
+        return true;
+    }
+    bool isValidSudoku(vector<vector<char>>& board) {
+        for(int i=0;i<9;i++)
+            for(int j=0;j<9;j++)
+                if(board[i][j]!='.')
+                    if(!valiDate(i,j,board,board[i][j]))
+                        return false;
+        return true;
     }
 };

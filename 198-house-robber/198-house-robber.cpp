@@ -1,14 +1,18 @@
 class Solution {
 public:
-    
-    int rob(vector<int>& A) {
-        vector<int> dp(size(A),-1);
-        return rob(A, dp, 0);
+    int solve(vector<int>&nums,int i,vector<int>&dp){
+        if(i>=nums.size())
+            return 0;
+        if(dp[i]!=-1)
+            return dp[i];
+        //take
+        int part1= nums[i]+solve(nums,i+2,dp);
+        //dont
+        int part2= solve(nums,i+1,dp);
+        return dp[i]=max(part1,part2);
     }
-    int rob(vector<int>& A, vector<int>& dp, int i) {
-        if(i >= size(A)) return 0;
-        if(dp[i] != -1) return dp[i];
-        return dp[i] = max(rob(A, dp, i+1), A[i] + rob(A, dp, i+2));
+    int rob(vector<int>& nums) {
+        vector<int>dp(nums.size(),-1);
+       return solve(nums,0,dp);
     }
 };
-/**/

@@ -29,7 +29,7 @@ class Solution
         return true;
         if(root->data<less or root->data>more)
         return false;
-        return solve(root->left,less,root->data) && solve(root->right,root->data,more);
+        return solve(root->left,less,root->data) & solve(root->right,root->data,more);
     }
     bool isBST(Node* root) 
     {

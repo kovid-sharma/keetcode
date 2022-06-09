@@ -11,32 +11,65 @@
  */
 class Solution {
 public:
-    void solve(TreeNode*root,vector<int>&ans)
+    TreeNode* findJustSmall(TreeNode*mosst,TreeNode*traver)
     {
-        if(root==NULL)
+        TreeNode*ret;
+        while(traver!=NULL)
         {
-            return;
+            if(traver->val<mosst->val)
+            {
+                ret=traver;
+                traver=traver->right;
+            }
+            else
+                traver=traver->left;
         }
-        solve(root->left,ans);
-        ans.push_back(root->val);
-        solve(root->right,ans);
+        return ret;
+    }
+    TreeNode* findJustBigg(TreeNode*least,TreeNode*traver)
+    {
+        TreeNode*ret;
+        while(traver!=NULL)
+        {
+            if(traver->val>least->val)
+            {
+                ret=traver;
+                traver=traver->left;
+            }
+            else
+                traver=traver->right;
+        }
+        return ret;
     }
     bool findTarget(TreeNode* root, int k) {
-        //not the right way
-        vector<int>ans;
-        solve(root,ans);
-        int i=0;
-        int j=ans.size()-1;
-        while(i<j)
+        //first go to extreme values
+        TreeNode*least=root;
+        TreeNode*mosst=root;
+        while(least->left!=NULL)
         {
-            int tmpSm=ans[i]+ans[j];
-            if(tmpSm>k)
-                j--;
-            else if(tmpSm<k)
-                i++;
+            least=least->left;
+        }
+        while(mosst->right!=NULL)
+        {
+            mosst=mosst->right;
+        }
+        //reached
+        while(mosst!=least)
+        {
+            int sum=mosst->val+least->val;
+            if(sum>k)
+            {
+                mosst= findJustSmall(mosst,root);
+            }
+            else if(sum<k)
+            {
+                least=findJustBigg(least,root);
+            }
             else
                 return true;
+            
         }
         return false;
+        
     }
 };

@@ -1,21 +1,20 @@
 class Solution {
 public:
-    int minimumTotal(vector<vector<int>>& grid) {
-        //bottom up
+    unordered_map<string,int>dp;
+    int solve(int r,int c,vector<vector<int>>&grid)
+    {
+        //basically solve definition is to calculate the minimum path from {i,j}
         
-        int row=grid.size();
-        vector<int>prev(grid[row-1].size(),0);
-        for(int i=0;i<grid[row-1].size();i++)
-            prev[i]=grid[row-1][i];
-        for(int i=row-2;i>=0;i--)
-        {
-            vector<int>curr(grid[i].size(),1e6);
-            for(int j=0;j<grid[i].size();j++)
-            {
-                curr[j]=min({curr[j],grid[i][j]+prev[j],grid[i][j]+prev[j+1]});
-            }
-            prev=curr;
-        }
-        return prev[0];
+        
+        if(r==grid.size()-1)
+            return grid[r][c];
+        string str=to_string(r)+" "+to_string(c);
+        if(dp.find(str)!=dp.end())
+            return dp[str];
+        
+        return dp[str]=grid[r][c]+min(solve(r+1,c,grid),solve(r+1,c+1,grid));
+    }
+    int minimumTotal(vector<vector<int>>& triangle) {
+        return solve(0,0,triangle);
     }
 };

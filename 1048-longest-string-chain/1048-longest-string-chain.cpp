@@ -37,9 +37,10 @@ public:
                 if(preExist.find(now)!=preExist.end())
                 {
                     preExist[str]=max(preExist[str],preExist[now]+1);
+                    maxx=max(maxx,preExist[str]);
                    
                 }
-                 maxx=max(maxx,preExist[str]);
+                 
             }
             
             

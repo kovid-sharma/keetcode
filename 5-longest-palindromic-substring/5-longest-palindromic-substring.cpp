@@ -1,42 +1,40 @@
 class Solution {
 public:
-    int ms=0;int me=0;//var for max r-l+1 string
+    int finSt=0;
+    int finEn=0;
     int ans=1;
-    int solve(int s,int e,vector<vector<int>>&dp,string &str)
+    //if they are not updated that means there are no substrings then the answer returned is the first character which is required
+    vector<vector<int>>mp;
+    int solve(int tmpSt,int tmpEn,string &s)
     {
-        if(s>=e)
-            return true;
-        if(dp[s][e]!=-1)
-            return dp[s][e];
-        if(str[e]==str[s] and solve(s+1,e-1,dp,str))
+        if(tmpSt>=tmpEn)
+            return 10;
+        
+        if(mp[tmpSt][tmpEn]!=-1)
+            return mp[tmpSt][tmpEn];
+        if(s[tmpSt]==s[tmpEn] and solve(tmpSt+1,tmpEn-1,s)==10)
         {
-            
-            ans=max(ans,e-s+1);
-            if(ans==e-s+1)
+            if(ans<tmpEn-tmpSt+1)
             {
-                ms=s;
-                me=e;
+                ans=tmpEn-tmpSt+1;
+                finSt=tmpSt;
+                finEn=tmpEn;
             }
-            return dp[s][e]=1;
+            return mp[tmpSt][tmpEn]=10;
         }
         else
-        {   
-            solve(s+1,e,dp,str);
-            solve(s,e-1,dp,str);
-            return dp[s][e]=0;
+        {
+            solve(tmpSt+1,tmpEn,s);
+            solve(tmpSt,tmpEn-1,s);
+            return mp[tmpSt][tmpEn]=12;
         }
     }
     string longestPalindrome(string s) {
+        //clear
+        //10 if pal and 12 if not
         int n=s.size();
-        vector<vector<int>>dp(n,vector<int>(n,-1));
-        for(int i=0;i<n;i++)
-            dp[i][i]=1;
-        //dp stores -1 if not solve
-        //stores 1 if substring btw i and j is palindrome
-        //stores 0 is substring btw i and j is not.
-        
-        
-        solve(0,n-1,dp,s);
-        return s.substr(ms,me-ms+1);
+        mp.resize(n,vector<int>(n,-1));
+        solve(0,n-1,s);
+        return s.substr(finSt,finEn-finSt+1);
     }
 };

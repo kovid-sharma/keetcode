@@ -23,16 +23,30 @@ class Solution
 {
     public:
     //Function to check whether a Binary Tree is BST or not.
-    int prev = INT_MIN;
-   bool isBST(Node* root) 
-   {
-       // Your code here
-       if(!root) return true;
-       if(!isBST(root->left)) return false;
-       if(prev >= root->data) return false;
-       prev = root->data;
-       return isBST(root->right);
-   }
+    void solve(Node*root,vector<int>&all)
+    {
+        if(root==NULL)
+        return;
+        solve(root->left,all);
+        all.push_back(root->data);
+        solve(root->right,all);
+        return;
+    }
+    bool isIt(vector<int>&all)
+    {
+        for(int i=0;i<all.size()-1;i++)
+        {
+            if(all[i]>=all[i+1])
+            return false;
+        }
+        return true;
+    }
+    bool isBST(Node* root) 
+    {
+        vector<int>all;
+        solve(root,all);
+        return isIt(all);
+    }
 };
 
 

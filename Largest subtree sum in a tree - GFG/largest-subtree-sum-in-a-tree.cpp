@@ -82,14 +82,17 @@ Node* buildTree(string str) {
 class Solution {
   public:
     // Function to find largest subtree sum.
+    map<Node*,int>mp;
     int func(Node* root)
     {
         if(root==NULL)return 0;
+        if(mp.find(root)!=mp.end())return mp[root];
         int curr= root->data;
         curr+= func(root->left);
         curr+=func(root->right);
-        return curr;
+        return mp[root]=curr;
     }
+    
     int findLargestSubtreeSum(Node* root)
     {
         //Write your code here
